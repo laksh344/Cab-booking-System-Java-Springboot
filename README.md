@@ -38,7 +38,7 @@ The **Cab Booking System** offers a complete ride-booking platform that bridges 
 
 ### 👤 User Dashboard
 
-![User Dashboard](./user-dashboard.jpg)
+![User Dashboard](./UserDashboard.jpg)
 
 ---
 
