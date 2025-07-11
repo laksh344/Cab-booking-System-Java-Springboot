@@ -1,0 +1,162 @@
+<!-- driver_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard - Cab Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1><i class="fas fa-taxi"></i> Driver Dashboard</h1>
+                <p>Welcome, <span id="driver-name">Driver</span>!</p>
+            </div>
+            <div class="header-right">
+                <button id="logout-btn" class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Profile Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-user-circle"></i> Profile Information</h2>
+            <div class="profile-info">
+                <div class="profile-item">
+                    <label>Name:</label>
+                    <span id="profile-name">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Email:</label>
+                    <span id="profile-email">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Phone:</label>
+                    <span id="profile-phone">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>License:</label>
+                    <span id="profile-license">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Vehicle:</label>
+                    <span id="profile-vehicle">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Status:</label>
+                    <span id="profile-status" class="status-badge">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Toggle Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-toggle-on"></i> Availability Status</h2>
+            <div class="status-toggle">
+                <button id="status-available" class="btn btn-success">
+                    <i class="fas fa-check-circle"></i> Go Online (Available)
+                </button>
+                <button id="status-unavailable" class="btn btn-danger">
+                    <i class="fas fa-times-circle"></i> Go Offline (Unavailable)
+                </button>
+                <p class="status-message" id="status-message"></p>
+            </div>
+        </section>
+
+        <!-- Incoming Ride Requests Section -->
+        <section id="ride-requests-section" class="dashboard-section" style="display: none;">
+            <h2><i class="fas fa-bell"></i> Incoming Ride Requests</h2>
+            <div class="ride-requests">
+                <div id="ride-requests-list">
+                    <!-- Ride requests will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Ride Section -->
+        <section id="current-ride-section" class="dashboard-section" style="display: none;">
+            <h2><i class="fas fa-clock"></i> Current Ride</h2>
+            <div id="current-ride-info" class="ride-info">
+                <!-- Current ride details will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Ride History Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-history"></i> Ride History</h2>
+            <div class="ride-history">
+                <div id="ride-history-list">
+                    <!-- Ride history will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Ratings Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-star"></i> My Ratings</h2>
+            <div class="ratings">
+                <div id="ratings-list">
+                    <!-- Ratings will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Toast Messages -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/driver-dashboard.js"></script>
+    <script>
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!auth.isUserAuthenticated() || !auth.hasRole('driver')) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Initialize dashboard
+            driverDashboard.init();
+        });
+
+        // Global functions
+        function logout() {
+            auth.logout();
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

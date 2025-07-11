@@ -1,0 +1,377 @@
+<!-- index.html - Modern Landing Page (Cab Easy) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-car"></i> Cab Booking System</h1>
+            <p>Book your ride with ease</p>
+        </header>
+
+        <!-- Role Selection -->
+        <div id="role-selection" class="auth-container">
+            <h2>Choose Your Role</h2>
+            <div class="role-buttons">
+                <button class="role-btn user-btn" onclick="showUserAuth()">
+                    <i class="fas fa-user"></i>
+                    <h3>User</h3>
+                    <p>Book rides and travel</p>
+                </button>
+                <button class="role-btn driver-btn" onclick="showDriverAuth()">
+                    <i class="fas fa-taxi"></i>
+                    <h3>Driver</h3>
+                    <p>Provide rides and earn</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- User Authentication -->
+        <div id="user-auth" class="auth-container" style="display: none;">
+            <h2>User Authentication</h2>
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('user-login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('user-register')">Register</button>
+            </div>
+
+            <!-- User Login Form -->
+            <form id="user-login" class="auth-form active">
+                <div class="form-group">
+                    <label for="user-login-email">Email</label>
+                    <input type="email" id="user-login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-login-password">Password</label>
+                    <input type="password" id="user-login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <!-- User Register Form -->
+            <form id="user-register" class="auth-form">
+                <div class="form-group">
+                    <label for="user-register-name">Full Name</label>
+                    <input type="text" id="user-register-name" required pattern="^[A-Za-z\s]{2,50}$" title="Name must be 2-50 letters and spaces only">
+                </div>
+                <div class="form-group">
+                    <label for="user-register-email">Email</label>
+                    <input type="email" id="user-register-email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address">
+                </div>
+                <div class="form-group">
+                    <label for="user-register-phone">Phone</label>
+                    <input type="tel" id="user-register-phone" required pattern="^[6-9]\d{9}$" title="Enter a valid 10-digit phone number starting with 6-9">
+                </div>
+                <div class="form-group">
+                    <label for="user-register-password">Password</label>
+                    <input type="password" id="user-register-password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters, include uppercase, lowercase, number, and special character">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+
+            <button class="btn btn-secondary" onclick="showRoleSelection()">
+                <i class="fas fa-arrow-left"></i> Back to Role Selection
+            </button>
+        </div>
+
+        <!-- Driver Authentication -->
+        <div id="driver-auth" class="auth-container" style="display: none;">
+            <h2>Driver Authentication</h2>
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('driver-login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('driver-register')">Register</button>
+            </div>
+
+            <!-- Driver Login Form -->
+            <form id="driver-login" class="auth-form active">
+                <div class="form-group">
+                    <label for="driver-login-email">Email</label>
+                    <input type="email" id="driver-login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="driver-login-password">Password</label>
+                    <input type="password" id="driver-login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <!-- Driver Register Form -->
+            <form id="driver-register" class="auth-form">
+                <div class="form-group">
+                    <label for="driver-register-name">Full Name</label>
+                    <input type="text" id="driver-register-name" required pattern="^[A-Za-z\s]{2,50}$" title="Name must be 2-50 letters and spaces only">
+                </div>
+                <div class="form-group">
+                    <label for="driver-register-email">Email</label>
+                    <input type="email" id="driver-register-email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address">
+                </div>
+                <div class="form-group">
+                    <label for="driver-register-phone">Phone</label>
+                    <input type="tel" id="driver-register-phone" required pattern="^[6-9]\d{9}$" title="Enter a valid 10-digit phone number starting with 6-9">
+                </div>
+                <div class="form-group">
+                    <label for="driver-register-license">License Number</label>
+                    <input type="text" id="driver-register-license" required pattern="^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$" title="Enter a valid license number (e.g., KA01AB1234)">
+                </div>
+                <div class="form-group">
+                    <label for="driver-register-vehicle">Vehicle Details</label>
+                    <input type="text" id="driver-register-vehicle" required pattern="^[A-Za-z0-9\s\-]+\s-\s[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$" title="Enter vehicle details (e.g., Toyota Camry - KA01AB1234)">
+                </div>
+                <div class="form-group">
+                    <label for="driver-register-password">Password</label>
+                    <input type="password" id="driver-register-password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters, include uppercase, lowercase, number, and special character">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+
+            <button class="btn btn-secondary" onclick="showRoleSelection()">
+                <i class="fas fa-arrow-left"></i> Back to Role Selection
+            </button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Toast Messages -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Form event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // User login form
+            const userLoginForm = document.getElementById('user-login');
+            if (userLoginForm) {
+                userLoginForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await handleUserLogin();
+                });
+            }
+
+            // User register form
+            const userRegisterForm = document.getElementById('user-register');
+            if (userRegisterForm) {
+                userRegisterForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await handleUserRegister();
+                });
+            }
+
+            // Driver login form
+            const driverLoginForm = document.getElementById('driver-login');
+            if (driverLoginForm) {
+                driverLoginForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await handleDriverLogin();
+                });
+            }
+
+            // Driver register form
+            const driverRegisterForm = document.getElementById('driver-register');
+            if (driverRegisterForm) {
+                driverRegisterForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await handleDriverRegister();
+                });
+            }
+        });
+
+        // Form handlers
+        async function handleUserLogin() {
+            const email = document.getElementById('user-login-email').value;
+            const password = document.getElementById('user-login-password').value;
+
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await auth.loginUser({ email, password });
+            } catch (error) {
+                console.error('Login error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function handleUserRegister() {
+            const name = document.getElementById('user-register-name').value;
+            const email = document.getElementById('user-register-email').value;
+            const phone = document.getElementById('user-register-phone').value;
+            const password = document.getElementById('user-register-password').value;
+
+            if (!name || !email || !phone || !password) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await auth.registerUser({ name, email, phone, password });
+                switchTab('user-login');
+            } catch (error) {
+                console.error('Registration error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function handleDriverLogin() {
+            const email = document.getElementById('driver-login-email').value;
+            const password = document.getElementById('driver-login-password').value;
+
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await auth.loginDriver({ email, password });
+            } catch (error) {
+                console.error('Login error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function handleDriverRegister() {
+            const name = document.getElementById('driver-register-name').value;
+            const email = document.getElementById('driver-register-email').value;
+            const phone = document.getElementById('driver-register-phone').value;
+            const licenseNumber = document.getElementById('driver-register-license').value;
+            const vehicleDetails = document.getElementById('driver-register-vehicle').value;
+            const password = document.getElementById('driver-register-password').value;
+
+            if (!name || !email || !phone || !licenseNumber || !vehicleDetails || !password) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await auth.registerDriver({ 
+                    name, 
+                    email, 
+                    phone, 
+                    licenseNumber, 
+                    vehicleDetails, 
+                    password 
+                });
+                switchTab('driver-login');
+            } catch (error) {
+                console.error('Registration error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Real-time validation for user and driver registration forms
+        function setValidationListeners(formId, fields) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorId = field.id + '-error';
+                let errorElem = document.getElementById(errorId);
+                if (!errorElem) {
+                    errorElem = document.createElement('span');
+                    errorElem.id = errorId;
+                    errorElem.style.color = 'red';
+                    input.parentNode.appendChild(errorElem);
+                }
+                input.addEventListener('input', function() {
+                    let error = '';
+                    if (field.type === 'email' && !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(input.value)) {
+                        error = 'Invalid email format.';
+                    } else if (field.type === 'phone' && !/^[6-9]\d{9}$/.test(input.value)) {
+                        error = 'Phone must be 10 digits, start with 6-9.';
+                    } else if (field.type === 'password' && !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(input.value)) {
+                        error = 'Password must be 8+ chars, include upper, lower, number, special.';
+                    } else if (field.type === 'license' && !/^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/.test(input.value)) {
+                        error = 'License must be like KA01AB1234.';
+                    } else if (field.type === 'vehicle' && !/^[A-Za-z0-9\s\-]+\s-\s[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/.test(input.value)) {
+                        error = 'Vehicle details must be like Model - KA01AB1234.';
+                    }
+                    errorElem.textContent = error;
+                });
+            });
+            form.addEventListener('submit', function(e) {
+                let hasError = false;
+                fields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const errorId = field.id + '-error';
+                    const errorElem = document.getElementById(errorId);
+                    let error = '';
+                    if (field.type === 'email' && !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(input.value)) {
+                        error = 'Invalid email format.';
+                    } else if (field.type === 'phone' && !/^[6-9]\d{9}$/.test(input.value)) {
+                        error = 'Phone must be 10 digits, start with 6-9.';
+                    } else if (field.type === 'password' && !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(input.value)) {
+                        error = 'Password must be 8+ chars, include upper, lower, number, special.';
+                    } else if (field.type === 'license' && !/^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/.test(input.value)) {
+                        error = 'License must be like KA01AB1234.';
+                    } else if (field.type === 'vehicle' && !/^[A-Za-z0-9\s\-]+\s-\s[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/.test(input.value)) {
+                        error = 'Vehicle details must be like Model - KA01AB1234.';
+                    }
+                    errorElem.textContent = error;
+                    if (error) hasError = true;
+                });
+                if (hasError) {
+                    e.preventDefault();
+                    showToast('Please fix validation errors.', 'error');
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setValidationListeners('user-register', [
+                {id: 'user-register-email', type: 'email'},
+                {id: 'user-register-phone', type: 'phone'},
+                {id: 'user-register-password', type: 'password'}
+            ]);
+            setValidationListeners('driver-register', [
+                {id: 'driver-register-email', type: 'email'},
+                {id: 'driver-register-phone', type: 'phone'},
+                {id: 'driver-register-license', type: 'license'},
+                {id: 'driver-register-vehicle', type: 'vehicle'},
+                {id: 'driver-register-password', type: 'password'}
+            ]);
+        });
+    </script>
+</body>
+</html>

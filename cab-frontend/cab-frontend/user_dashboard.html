@@ -1,0 +1,211 @@
+<!-- user_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Cab Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1><i class="fas fa-user"></i> User Dashboard</h1>
+                <p>Welcome, <span id="user-name">User</span>!</p>
+            </div>
+            <div class="header-right">
+                <button id="logout-btn" class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Profile Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-user-circle"></i> Profile Information</h2>
+            <div class="profile-info">
+                <div class="profile-item">
+                    <label>Name:</label>
+                    <span id="profile-name">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Email:</label>
+                    <span id="profile-email">Loading...</span>
+                </div>
+                <div class="profile-item">
+                    <label>Phone:</label>
+                    <span id="profile-phone">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Ride Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-car"></i> Book a Ride</h2>
+            <div class="ride-booking">
+                <form id="book-ride-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickup-location">Pickup Location</label>
+                            <input type="text" id="pickup-location" placeholder="Enter pickup address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dropoff-location">Dropoff Location</label>
+                            <input type="text" id="dropoff-location" placeholder="Enter destination" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="peak-hour-checkbox">
+                        <label for="peak-hour-checkbox">Peak Hour</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Find Ride
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Current Ride Section -->
+        <section id="current-ride-section" class="dashboard-section" style="display: none;">
+            <h2><i class="fas fa-clock"></i> Current Ride</h2>
+            <div id="current-ride-info" class="ride-info">
+                <!-- Current ride details will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Ride History Section -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-history"></i> Ride History</h2>
+            <div class="ride-history">
+                <div id="ride-history-list">
+                    <!-- Ride history will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Modal -->
+        <div id="payment-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-credit-card"></i> Payment</h3>
+                    <span class="close" onclick="closePaymentModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="payment-details">
+                        <div class="payment-item">
+                            <label>Ride ID:</label>
+                            <span id="payment-ride-id"></span>
+                        </div>
+                        <div class="payment-item">
+                            <label>Amount:</label>
+                            <span id="payment-amount"></span>
+                        </div>
+                        <div class="payment-item">
+                            <label>Payment Method:</label>
+                            <select id="payment-method">
+                                <option value="CARD">Credit/Debit Card</option>
+                                <option value="CASH">Cash</option>
+                                <option value="UPI">UPI</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="processPayment()" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Pay Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Modal -->
+        <div id="rating-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-star"></i> Rate Your Ride</h3>
+                    <span class="close" onclick="closeRatingModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="rating-form">
+                        <div class="rating-stars">
+                            <span class="star" data-rating="1">☆</span>
+                            <span class="star" data-rating="2">☆</span>
+                            <span class="star" data-rating="3">☆</span>
+                            <span class="star" data-rating="4">☆</span>
+                            <span class="star" data-rating="5">☆</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating-comments">Comments (Optional)</label>
+                            <textarea id="rating-comments" placeholder="Share your experience..."></textarea>
+                        </div>
+                        <button onclick="submitRating()" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Submit Rating
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Toast Messages -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/user-dashboard.js"></script>
+    <script>
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!auth.isUserAuthenticated() || !auth.hasRole('user')) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Initialize dashboard
+            userDashboard.init();
+        });
+
+        // Global functions
+        function logout() {
+            auth.logout();
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').style.display = 'none';
+        }
+
+        function closeRatingModal() {
+            document.getElementById('rating-modal').style.display = 'none';
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
