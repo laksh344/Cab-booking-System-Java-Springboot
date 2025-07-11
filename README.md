@@ -34,6 +34,26 @@ The **Cab Booking System** offers a complete ride-booking platform that bridges 
 
 ---
 
+## 🖼️ Screenshots
+
+### 👤 User Dashboard
+
+![User Dashboard](./user-dashboard.jpg)
+
+---
+
+### 🚗 Driver Dashboard
+
+![Driver Dashboard](./driver-dashboard.jpg)
+
+---
+
+### 📑 Ride History
+
+![Ride History](./ride-history.jpg)
+
+---
+
 ## 🧱 Tech Stack
 
 ### Frontend
@@ -57,7 +77,6 @@ The **Cab Booking System** offers a complete ride-booking platform that bridges 
 ## 🗂️ Project Structure
 
 ```
-
 cab-booking-system/
 ├── src/main/java/com/cabbooking/
 │   ├── controller/
@@ -76,49 +95,33 @@ cab-booking-system/
 │       ├── api.js
 │       ├── user-dashboard.js
 │       └── driver-dashboard.js
-
-````
+```
 
 ---
 
 ## 🛠️ Backend Setup in IntelliJ
 
-If you're using **IntelliJ IDEA** to run the backend:
-
 ### 🔗 Backend Code Link
-> [Click here to access backend code](https://drive.google.com/drive/folders/1yG61tS2x0GLVrfIypz3GVNabNJ6hjQVG?usp=sharing)
+> [Access backend files](https://drive.google.com/drive/folders/1yG61tS2x0GLVrfIypz3GVNabNJ6hjQVG?usp=sharing)
 
-### 💻 Step-by-Step IntelliJ Instructions
+### 💻 IntelliJ Instructions
 
-1. **Download the Project**
-   - Download or clone the project folder from the Google Drive link above.
-
-2. **Open IntelliJ IDEA**
-   - Click `File → Open`
-   - Select the root folder of the backend (where `pom.xml` is located)
-
-3. **Import as Maven Project**
-   - IntelliJ will automatically detect the Maven structure.
-   - If prompted, select "Import as Maven project".
-
-4. **Configure the Database**
-   - Open `src/main/resources/application.properties`
-   - Set your database URL, username, and password:
-     ```properties
-     spring.datasource.url=jdbc:mysql://localhost:3306/cab_booking
-     spring.datasource.username=your_username
-     spring.datasource.password=your_password
-     ```
-
-5. **Create the Database**
+1. **Download or clone the project**
+2. **Open IntelliJ IDEA → File → Open → Select the backend folder**
+3. **Ensure Maven is detected → Load Maven project if prompted**
+4. **Create the database in MySQL:**
    ```sql
    CREATE DATABASE cab_booking;
-````
-
-6. **Build and Run**
-
-   * Right-click `CabBookingSystemApplication.java` (inside `com.cabbooking`)
-   * Click `Run` to start the backend server (runs on `http://localhost:8081` by default)
+   ```
+5. **Configure `application.properties`**
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/cab_booking
+   spring.datasource.username=your_username
+   spring.datasource.password=your_password
+   ```
+6. **Run the application**
+   - Navigate to `CabBookingSystemApplication.java`
+   - Right-click and choose **Run**
 
 ---
 
@@ -138,23 +141,21 @@ npx http-server
 
 ## 🔐 Authentication & Authorization
 
-* JWT-based secure login
-* Role-based access (User or Driver)
-* Token validation for protected routes
+- JWT-based secure login
+- Role-based access (User or Driver)
+- Token validation for protected routes
 
 ---
 
 ## 🧪 Testing
 
 ### Backend
-
-* Unit & Integration Testing with JUnit
-* Authentication and API endpoint validation
+- Unit & Integration Testing with JUnit
+- Authentication and API endpoint validation
 
 ### Frontend
-
-* Manual user testing
-* API communication validation
+- Manual user testing
+- API communication validation
 
 ---
 
@@ -173,18 +174,18 @@ python -m http.server 8000
 
 ### Cloud Deployment
 
-* **Backend**: Heroku, Render, or AWS EC2
-* **Frontend**: Netlify, Vercel, or GitHub Pages
+- **Backend**: Heroku, Render, or AWS EC2
+- **Frontend**: Netlify, Vercel, or GitHub Pages
 
 ---
 
 ## 🧭 Roadmap
 
-* Real-time GPS tracking
-* WebSocket for live updates
-* Admin analytics dashboard
-* Docker containerization
-* Microservices structure
+- Real-time GPS tracking
+- WebSocket for live updates
+- Admin analytics dashboard
+- Docker containerization
+- Microservices structure
 
 ---
 
@@ -197,16 +198,3 @@ This project is open-source under the [MIT License](LICENSE).
 ## 🙌 Contact
 
 For queries or contributions, open an [issue](https://github.com/your-username/cab-booking-system/issues) or submit a pull request.
-
-```
-
-##SCREENSHOTS
-![WhatsApp Image 2025-07-05 at 19 19 58_782ed74e](https://github.com/user-attachments/assets/0f2efd24-f105-464c-af10-54574bdf858e)
-
-![WhatsApp Image 2025-07-05 at 19 19 58_6cadfed2](https://github.com/user-attachments/assets/d5a651f9-1b11-4dec-b2a6-ba9a37855dd2)
-
-![WhatsApp Image 2025-07-05 at 19 19 57_c3e56279](https://github.com/user-attachments/assets/58aef242-d2ef-417a-be39-f333066fd3c0)
-
-
-
-```
