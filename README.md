@@ -200,7 +200,13 @@ For queries or contributions, open an [issue](https://github.com/your-username/c
 
 ```
 
----
+##SCREENSHOTS
+![WhatsApp Image 2025-07-05 at 19 19 58_782ed74e](https://github.com/user-attachments/assets/0f2efd24-f105-464c-af10-54574bdf858e)
 
-Would you like me to export this as a downloadable `README.md` file ready for GitHub upload?
+![WhatsApp Image 2025-07-05 at 19 19 58_6cadfed2](https://github.com/user-attachments/assets/d5a651f9-1b11-4dec-b2a6-ba9a37855dd2)
+
+![WhatsApp Image 2025-07-05 at 19 19 57_c3e56279](https://github.com/user-attachments/assets/58aef242-d2ef-417a-be39-f333066fd3c0)
+
+
+
 ```
